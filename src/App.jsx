@@ -15,26 +15,8 @@ const App = () => {
 };
 
 const AllRoutes = () => {
-  const { token } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [, setCookie] = useCookies(['postLoginRedirect']);
-
-  useEffect(() => {
-    if (!token) {
-      setCookie('postLoginRedirect', location.pathname, { path: '/' });
-      navigate('/login');
-    }
-  }, [token]);
-
   return (
     <Routes>
-      {!token && (
-        <Route path="login" element={<LoginLayout />}>
-          <Route index element={<Login />} />
-        </Route>
-      )}
-
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
 
