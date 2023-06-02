@@ -76,6 +76,10 @@ module.exports = {
         exclude: /node_modules/, //folder to be excluded
         use: 'babel-loader', //loader which we are going to use
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [
