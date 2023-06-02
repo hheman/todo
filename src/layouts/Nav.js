@@ -1,21 +1,27 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import Nav from 'react-bootstrap/Nav';
 
-const Nav = () => {
+const AppNav = () => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink exact="true" to="/">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/items">Items</NavLink>
-        </li>
-      </ul>
-    </nav>
+    <Nav as="ul" variant="pills" defaultActiveKey="" className="my-2">
+      <Nav.Item as="li">
+        <NavLink
+          className="nav-link"
+          activeClassName="active"
+          exact="true"
+          to="/"
+        >
+          Home
+        </NavLink>
+      </Nav.Item>
+      <Nav.Item as="li">
+        <NavLink className="nav-link" activeClassName="active" to="/items">
+          Items
+        </NavLink>
+      </Nav.Item>
+    </Nav>
   );
 };
 
-export default Nav;
+export default AppNav;

@@ -19,11 +19,6 @@ const AllRoutes = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-
-        <Route path="items">
-          <Route index element={<ItemsList />} />
-          <Route path=":itemId" element={<ItemNote />} />
-        </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

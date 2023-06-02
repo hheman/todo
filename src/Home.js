@@ -1,15 +1,16 @@
 import React from 'react';
-import Heading from './Heading';
 import ItemsList from './ItemsList';
+import ItemForm from './ItemForm';
+import Container from 'react-bootstrap/Container';
 
 const Home = () => {
   return (
     <>
-      <Heading />
-      <p>
-        Welcome to React App thats build using Webpack and Babel separately.
-      </p>
-      <ItemsList count={3} />
+      <Container className="mx-auto w-50">
+        <h1>This is your to-do app.</h1>
+        <ItemForm />
+        <ItemsList count={3} />
+      </Container>
     </>
   );
 };

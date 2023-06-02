@@ -24,7 +24,14 @@ const itemsSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    addItem: (state, action) => {
+      state.items.push({ id: state.items.length + 1, name: action.payload });
+    },
+    removeItem: (state, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchItems.pending, (state) => {

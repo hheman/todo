@@ -1,16 +1,12 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchItems } from './store/itemsSlice';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const ItemsList = ({ count }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const items = useSelector((state) => state.items.items);
-  const handleClick = ({ id }) => {
-    navigate(`/items/${id}`);
-  };
 
   useEffect(() => {
     dispatch(fetchItems({ count }));
@@ -19,13 +15,11 @@ const ItemsList = ({ count }) => {
   return (
     <>
       {items.length ? (
-        <ul>
+        <ListGroup>
           {items.map((item) => (
-            <li key={item.id} onClick={() => handleClick(item)}>
-              {item.name}
-            </li>
+            <ListGroup.Item key={item.id}>{item.name}</ListGroup.Item>
           ))}
-        </ul>
+        </ListGroup>
       ) : (
         <p>No items found</p>
       )}
