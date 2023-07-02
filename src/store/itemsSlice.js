@@ -19,6 +19,7 @@ export const fetchItem = createAsyncThunk(
 const itemsSlice = createSlice({
   name: 'items',
   initialState: {
+    nextItemId: 1,
     items: [],
     selectedItem: null,
     loading: false,
@@ -26,7 +27,10 @@ const itemsSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-      state.items.push({ id: state.items.length + 1, name: action.payload });
+      state.items.push({ id: state.nextItemId, name: action.payload });
+      state.nextItemId += 1;
+
+      return state;
     },
     removeItem: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
