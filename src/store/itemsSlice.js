@@ -44,6 +44,10 @@ const itemsSlice = createSlice({
       .addCase(fetchItems.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
+        state.nextItemId =
+          action.payload.length > 0
+            ? Math.max(...action.payload.map((item) => item.id)) + 1
+            : 1;
       })
       .addCase(fetchItems.rejected, (state, action) => {
         state.loading = false;
