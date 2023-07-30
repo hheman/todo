@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 
 const Layout = () => {
   return (
-    <Container>
+    <Container className="mx-auto" style={{ maxWidth: '600px' }}>
       <Nav />
       <Outlet />
     </Container>
