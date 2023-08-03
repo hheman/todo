@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
 import { addItem } from './store/itemsSlice';
 
 function ItemForm() {
@@ -17,15 +19,22 @@ function ItemForm() {
 
   return (
     <Form className="mt-3" onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Label>Add an item</Form.Label>
+      <InputGroup className="mb-3">
         <Form.Control
           type="text"
-          placeholder="I want to ..."
+          placeholder="Start typing..."
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
         />
-      </Form.Group>
+        <Button
+          variant="light"
+          className="px-4"
+          style={{ backgroundColor: '#cfe2ff', color: '#007bff' }}
+          onClick={handleSubmit}
+        >
+          Add
+        </Button>
+      </InputGroup>
     </Form>
   );
 }
