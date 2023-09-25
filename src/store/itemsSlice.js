@@ -2,19 +2,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import ItemsService from '../services/items';
 
-export const fetchItems = createAsyncThunk(
-  'items/fetchItems',
-  async ({ count }) => {
-    return await new ItemsService().fetchItems({ count });
-  }
-);
+const itemsService = new ItemsService();
 
-export const fetchItem = createAsyncThunk(
-  'items/fetchItem',
-  async ({ itemId }) => {
-    return await new ItemsService().fetchItemById(itemId);
-  }
-);
+export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
+  return await itemsService.fetchItems();
+});
+
+export const fetchItem = createAsyncThunk('items/fetchItem', async () => {
+  throw new Error('Not implemented');
+});
 
 const itemsSlice = createSlice({
   name: 'items',
@@ -29,11 +25,15 @@ const itemsSlice = createSlice({
     addItem: (state, action) => {
       state.items.push({ id: state.nextItemId, name: action.payload });
       state.nextItemId += 1;
+      itemsService.updateItems(state.items);
 
       return state;
     },
     removeItem: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
+      itemsService.updateItems(state.items);
+
+      return state;
     },
   },
   extraReducers: (builder) => {
@@ -50,17 +50,6 @@ const itemsSlice = createSlice({
             : 1;
       })
       .addCase(fetchItems.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      })
-      .addCase(fetchItem.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchItem.fulfilled, (state, action) => {
-        state.loading = false;
-        state.selectedItem = action.payload;
-      })
-      .addCase(fetchItem.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
