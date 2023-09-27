@@ -37,7 +37,7 @@ const ItemsList = ({ count }) => {
           ))}
         </ListGroup>
       ) : (
-        <p>No items found</p>
+        <p className="px-3">No items found</p>
       )}
     </>
   );
