@@ -23,11 +23,25 @@ const itemsSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-      state.items.push({ id: state.nextItemId, name: action.payload });
+      state.items.push({
+        id: state.nextItemId,
+        checked: false,
+        name: action.payload,
+      });
       state.nextItemId += 1;
       itemsService.updateItems(state.items);
 
       return state;
+    },
+    updateItemChecked: (state, action) => {
+      state.items = state.items.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, checked: action.payload.checked };
+        }
+
+        return item;
+      });
+      itemsService.updateItems(state.items);
     },
     removeItem: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
@@ -56,6 +70,6 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem } = itemsSlice.actions;
+export const { addItem, removeItem, updateItemChecked } = itemsSlice.actions;
 
 export default itemsSlice.reducer;
