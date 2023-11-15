@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems, removeItem, updateItemChecked } from './store/itemsSlice';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import CloseButton from 'react-bootstrap/CloseButton';
 import PropTypes from 'prop-types';
 
 const ItemsList = ({ count }) => {
@@ -51,13 +51,11 @@ const ItemsList = ({ count }) => {
                   </Form.Check.Label>
                 </Form.Check>
               </div>
-              <Button
+              <CloseButton
                 size="sm"
                 className="ml-auto"
                 onClick={() => handleRemove(item.id)}
-              >
-                remove
-              </Button>
+              />
             </ListGroup.Item>
           ))}
         </ListGroup>
