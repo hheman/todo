@@ -31,15 +31,17 @@ const ItemsList = ({ count }) => {
               key={item.id}
               className="d-flex justify-content-between align-items-center"
             >
-              <div className="d-flex align-items-center">
+              <div
+                className={`d-flex align-items-center ${item.checked ? 'opacity-50' : ''}`}
+              >
                 <Form.Check type="checkbox">
                   <Form.Check.Input
                     type="checkbox"
-                    className="border-2"
+                    className="border-2 shadow-none"
                     style={{
                       borderColor: item.checked
-                        ? 'rgb(13, 110, 253)'
-                        : 'rgb(207, 226, 255)',
+                        ? 'var(--bs-primary)'
+                        : 'var(--bs-gray-500)',
                     }}
                     checked={item.checked}
                     onChange={(e) => handleChecked(item.id, e.target.checked)}
