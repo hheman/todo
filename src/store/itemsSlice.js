@@ -49,6 +49,16 @@ const itemsSlice = createSlice({
 
       return state;
     },
+    removeCheckedItems: (state) => {
+      state.items = state.items.filter((item) => !item.checked);
+      itemsService.updateItems(state.items);
+
+      return state;
+    },
+    removeAllItems: (state) => {
+      state.items = [];
+      itemsService.updateItems(state.items);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -70,6 +80,12 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, updateItemChecked } = itemsSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  updateItemChecked,
+  removeCheckedItems,
+  removeAllItems,
+} = itemsSlice.actions;
 
 export default itemsSlice.reducer;

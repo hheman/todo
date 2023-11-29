@@ -18,8 +18,8 @@ function ItemForm() {
   };
 
   return (
-    <Form className="mt-3" onSubmit={handleSubmit}>
-      <InputGroup className="mb-3">
+    <Form className="mt-3 mb-2" onSubmit={handleSubmit}>
+      <InputGroup>
         <Form.Control
           type="text"
           placeholder="Start typing..."
