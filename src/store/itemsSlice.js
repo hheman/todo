@@ -46,6 +46,25 @@ const itemsSlice = createSlice({
     removeItem: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
       itemsService.updateItems(state.items);
+      console.log('in remove', state.items);
+
+      return state;
+    },
+    swapItems: (state, action) => {
+      const { movedItem, movedAfterThisItem } = action.payload;
+      const sourceIndex = state.items.findIndex(
+        (item) => item.id === movedItem
+      );
+      const destinationIndex = state.items.findIndex(
+        (item) => item.id === movedAfterThisItem
+      );
+
+      const updatedItems = [...state.items];
+      const [removedItem] = updatedItems.splice(sourceIndex, 1);
+      updatedItems.splice(destinationIndex, 0, removedItem);
+
+      state.items = updatedItems;
+      itemsService.updateItems(state.items);
 
       return state;
     },
@@ -84,6 +103,7 @@ export const {
   addItem,
   removeItem,
   updateItemChecked,
+  swapItems,
   removeCheckedItems,
   removeAllItems,
 } = itemsSlice.actions;
