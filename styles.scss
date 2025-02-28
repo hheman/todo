@@ -46,9 +46,10 @@ button.close {
 .todo-item-card {
   background-color: $light;
   border: 1px solid $secondary;
-    border-radius: .25rem;
-    box-shadow: $btn-box-shadow;
-    &:hover {
-        box-shadow: $btn-box-hover-shadow;
-    }
+  border-radius: .25rem;
+  box-shadow: $btn-box-shadow;
+  &:hover {
+      box-shadow: $btn-box-hover-shadow;
+  }
+  touch-action: none;
 }
