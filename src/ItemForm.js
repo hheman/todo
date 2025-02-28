@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
 import { addItem } from './store/itemsSlice';
 
 function ItemForm() {
@@ -18,23 +17,22 @@ function ItemForm() {
   };
 
   return (
-    <Form className="mt-3 mb-2" onSubmit={handleSubmit}>
-      <InputGroup>
-        <Form.Control
-          type="text"
-          placeholder="Start typing..."
-          value={itemName}
-          onChange={(e) => setItemName(e.target.value)}
-        />
-        <Button
-          variant="light"
-          className="px-4"
-          style={{ backgroundColor: '#cfe2ff', color: '#007bff' }}
-          onClick={handleSubmit}
-        >
-          Add
-        </Button>
-      </InputGroup>
+    <Form className="d-flex mt-3 mb-2 mr-2" onSubmit={handleSubmit}>
+      <Form.Control
+        type="text"
+        placeholder="Start typing..."
+        className="flex-grow-1"
+        value={itemName}
+        onChange={(e) => setItemName(e.target.value)}
+      />
+      <Button
+        variant="primary"
+        className="px-4 ms-2 flex-shrink-0"
+        // style={{ backgroundColor: '#cfe2ff', color: '#007bff' }}
+        onClick={handleSubmit}
+      >
+        Add
+      </Button>
     </Form>
   );
 }
