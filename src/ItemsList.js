@@ -1,14 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchItems,
-  removeItem,
-  updateItemChecked,
-  swapItems,
-} from './store/itemsSlice';
+import { fetchItems, swapItems } from './store/itemsSlice';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Form from 'react-bootstrap/Form';
-import CloseButton from 'react-bootstrap/CloseButton';
 import PropTypes from 'prop-types';
 import {
   DndContext,
@@ -19,20 +12,53 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import {
-  useSortable,
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import { Item } from './Item';
+
+class MyPointerSensor extends PointerSensor {
+  static activators = [
+    {
+      eventName: 'onPointerDown',
+      handler: ({ nativeEvent: event }) => {
+        if (
+          !event.isPrimary ||
+          event.button !== 0 ||
+          isInteractiveElement(event.target)
+        ) {
+          return false;
+        }
+
+        return true;
+      },
+    },
+  ];
+}
+
+function isInteractiveElement(element) {
+  const interactiveElements = [
+    'button',
+    'input',
+    'textarea',
+    'select',
+    'option',
+  ];
+
+  if (interactiveElements.includes(element.tagName.toLowerCase())) {
+    return true;
+  }
+
+  return false;
+}
 
 const ItemsList = ({ count }) => {
   const dispatch = useDispatch();
 
   const items = useSelector((state) => state.items.items);
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(MyPointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })

@@ -46,7 +46,6 @@ const itemsSlice = createSlice({
     removeItem: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
       itemsService.updateItems(state.items);
-      console.log('in remove', state.items);
 
       return state;
     },
