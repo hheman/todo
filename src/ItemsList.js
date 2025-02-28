@@ -44,6 +44,7 @@ function isInteractiveElement(element) {
     'textarea',
     'select',
     'option',
+    'svg',
   ];
 
   if (interactiveElements.includes(element.tagName.toLowerCase())) {
@@ -86,11 +87,11 @@ const ItemsList = ({ count }) => {
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         {items.length ? (
-          <ListGroup>
+          <div className="d-flex flex-column w-100">
             {items.map((item) => (
               <Item key={item.id} {...item} />
             ))}
-          </ListGroup>
+          </div>
         ) : (
           <p className="px-3">No items found</p>
         )}

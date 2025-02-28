@@ -11,15 +11,44 @@ $focus-ring-width: .1rem !default;
 // Buttons
 $enable-shadows: true; // Enable button shadows
 $btn-border-radius: .2rem; // Button border radius
-$btn-box-width: 3px;
-$btn-box-shadow: $btn-box-width $btn-box-width 0 #555;
-$btn-box-hover-width: 1px;
-$btn-box-hover-shadow: $btn-box-hover-width $btn-box-hover-width 0 #222;
+$btn-box-shadow-width: 3px;
+$btn-box-shadow: $btn-box-shadow-width $btn-box-shadow-width 0 #555;
+$btn-box-shadow-hover-width: 1px;
+$btn-box-hover-shadow: $btn-box-shadow-hover-width $btn-box-shadow-hover-width 0 #222;
+
+$input-border-color: black;
+$input-focus-border-color: black;
+$input-box-shadow-width: 1px;
+$input-box-shadow: inset $input-box-shadow-width $input-box-shadow-width 0 #555;
+$form-check-input-border: 1px solid black;
+$form-check-input-checked-bg-color: black;
+$form-check-input-checked-border-color: black;
+$form-check-input-focus-box-shadow: $input-box-shadow;
 
 @import "~bootstrap/scss/bootstrap";
+
+button.close {
+  border: none;
+  border-radius: 50%;
+}
 
 .btn {
     &:hover {
         box-shadow: $btn-box-hover-shadow;
       }
+}
+
+.form-check-input {
+  background-color: $gray-300;
+  box-shadow: $input-box-shadow;
+}
+
+.todo-item-card {
+  background-color: $light;
+  border: 1px solid $secondary;
+    border-radius: .25rem;
+    box-shadow: $btn-box-shadow;
+    &:hover {
+        box-shadow: $btn-box-hover-shadow;
+    }
 }
